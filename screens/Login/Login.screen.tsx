@@ -1,11 +1,19 @@
 import { Text, StyleSheet, View, Pressable } from 'react-native';
-import React, { Component } from 'react';
+import React, { Component, useEffect } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Entypo, AntDesign, MaterialIcons } from '@expo/vector-icons';
 import { colorCode } from '../../utils/colors.util';
+import { useAuthWithSpotify } from '../../hooks/useAuthWithSpotify';
 
 export const LoginScreen = () => {
+  const { request, response, authWithSpotify } = useAuthWithSpotify();
+  useEffect(() => {
+    if (response?.type === 'success') {
+      console.log(response.params);
+    }
+  }, [response]);
+
   return (
     <LinearGradient
       colors={[colorCode.secondaryBlack, colorCode.primaryBlack]}
@@ -21,7 +29,11 @@ export const LoginScreen = () => {
         />
         <Text style={styles.textStyle}>Millions of Songs Free on spotify!</Text>
         <View style={styles.spacingViewStyle} />
-        <Pressable onPress={() => {}} style={styles.signInButtonStyle}>
+        <Pressable
+          onPress={authWithSpotify}
+          disabled={!request}
+          style={styles.signInButtonStyle}
+        >
           <Text>Sign In with spotify</Text>
         </Pressable>
 
