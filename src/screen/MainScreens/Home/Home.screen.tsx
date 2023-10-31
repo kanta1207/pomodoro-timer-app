@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
-import { LinearGradientWrapper } from '../../components/common/LinearGradientWrapper';
+import { LinearGradientWrapper } from '../../../components/common/LinearGradientWrapper';
 import { ScrollView } from 'react-native';
 import { homeScreenStyles } from './homeScreen.styles';
-import { useAPIGetProfile } from '../../hooks/api/useAPIGetProfile';
+import { useAPIGetProfile } from '../../../hooks/api/useAPIGetProfile';
 
 export const HomeScreen = () => {
   const { userProfile, getProfile } = useAPIGetProfile();
