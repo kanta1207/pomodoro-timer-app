@@ -11,7 +11,7 @@ import { LoginScreen } from './screens/Login/Login.screen';
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 
-const BottomTabs = () => {
+const MainScreen = () => {
   return (
     <Tab.Navigator
       screenOptions={{
@@ -67,7 +67,7 @@ export const Navigation = () => {
         />
         <Stack.Screen
           name="Main"
-          component={BottomTabs}
+          component={MainScreen}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>
