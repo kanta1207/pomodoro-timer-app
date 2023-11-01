@@ -3,8 +3,6 @@ import { useState } from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 import { TimerCountDownDisplay } from '../../../components/features/pomodoro/TimerCountDownDisplay/TimerCountDownDisplay';
 import { TimerControlButton } from '../../../components/features/pomodoro/TimerControlButton/TimerControlButton';
-import { TimerControlButtons } from '../../../components/features/pomodoro/TimerControlButtons';
-import { LinearGradientWrapper } from '../../../components/common/LinearGradientWrapper';
 import { RemainingPomodoroDisplay } from '../../../components/features/pomodoro/RemainingPomodorosDisplay/RemainingPomodoroDisplay';
 
 const focusTimeMin = 1 * 60 * 1000;
