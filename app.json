@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "spotify-clone",
-    "slug": "spotify-clone",
+    "name": "pomodoro-timer-app",
+    "slug": "pomodoro-timer-app",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -11,9 +11,7 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true
     },
