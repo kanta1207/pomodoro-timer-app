@@ -2,12 +2,13 @@ import React from 'react';
 import { StyleSheet } from 'react-native';
 
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { Entypo, AntDesign, Ionicons } from '@expo/vector-icons';
+import { AntDesign, Ionicons } from '@expo/vector-icons';
 
 import { colorCode } from '../../utils/colors.util';
 
 import { HomeScreen } from './Home/Home.screen';
 import { PomodoroScreen } from './Pomodoro/Pomodoro.screen';
+import { SettingScreen } from './Setting/Setting.screen';
 
 const Tab = createBottomTabNavigator();
 
@@ -16,38 +17,39 @@ export const MainScreens = () => {
     <Tab.Navigator
       screenOptions={{
         tabBarStyle: styles.tabBar,
-      }}>
-      <Tab.Screen
-        name="Home"
-        component={HomeScreen}
-        options={{
-          tabBarLabel: 'Home',
-          headerShown: false,
-          tabBarLabelStyle: { color: colorCode.white },
-          tabBarIcon: ({ focused }) =>
-            focused ? (
-              <Entypo name="home" size={24} color={colorCode.white} />
-            ) : (
-              <AntDesign name="home" size={24} color={colorCode.white} />
-            ),
-        }}
-      />
+      }}
+    >
       <Tab.Screen
         name="Pomodoro"
         component={PomodoroScreen}
         options={{
-          tabBarLabel: 'Profile',
+          tabBarLabel: 'Pomo',
           headerShown: false,
           tabBarLabelStyle: { color: colorCode.white },
           tabBarIcon: ({ focused }) =>
             focused ? (
-              <Ionicons name="person" size={24} color={colorCode.white} />
+              <Ionicons name="timer" size={24} color={colorCode.white} />
             ) : (
               <Ionicons
-                name="person-outline"
+                name="timer-outline"
                 size={24}
                 color={colorCode.white}
               />
+            ),
+        }}
+      />
+      <Tab.Screen
+        name="Setting"
+        component={SettingScreen}
+        options={{
+          tabBarLabel: 'Setting',
+          headerShown: false,
+          tabBarLabelStyle: { color: colorCode.white },
+          tabBarIcon: ({ focused }) =>
+            focused ? (
+              <AntDesign name="setting" size={24} color={colorCode.white} />
+            ) : (
+              <AntDesign name="setting" size={24} color={colorCode.white} />
             ),
         }}
       />

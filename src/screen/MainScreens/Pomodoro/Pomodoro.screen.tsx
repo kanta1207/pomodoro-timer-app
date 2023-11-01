@@ -1,9 +1,11 @@
 import { StatusBar } from 'expo-status-bar';
 import { useState } from 'react';
 import { StyleSheet, View, Text } from 'react-native';
-import { TimerCountDownDisplay } from '../../../components/TimerCountDownDisplay';
-import { TimerControlButton } from '../../../components/TimerControlButton';
-import { TimerControlButtons } from '../../../components/TimerControlButtons';
+import { TimerCountDownDisplay } from '../../../components/features/pomodoro/TimerCountDownDisplay/TimerCountDownDisplay';
+import { TimerControlButton } from '../../../components/features/pomodoro/TimerControlButton/TimerControlButton';
+import { TimerControlButtons } from '../../../components/features/pomodoro/TimerControlButtons';
+import { LinearGradientWrapper } from '../../../components/common/LinearGradientWrapper';
+import { RemainingPomodoroDisplay } from '../../../components/features/pomodoro/RemainingPomodorosDisplay/RemainingPomodoroDisplay';
 
 const focusTimeMin = 1 * 60 * 1000;
 const breakTimeMin = 1 * 60 * 1000;
@@ -11,7 +13,7 @@ const breakTimeMin = 1 * 60 * 1000;
 export const PomodoroScreen = () => {
   const [timerCount, setTimerCount] = useState(focusTimeMin);
   const [timerInterval, setTimerInterval] = useState<NodeJS.Timeout | null>(
-    null,
+    null
   );
   const [isTimerRunning, setIsTimerRunning] = useState(false);
   const [timerMode, setTimerMode] = useState<'Focus' | 'Break'>('Focus');
@@ -50,11 +52,10 @@ export const PomodoroScreen = () => {
         timerDate={timerDate}
         timerPercentage={timerPercentage}
       />
-      {/* <TimerControlButtons
-        isTimerRunning={isTimerRunning}
-        startTimer={startTimer}
-        stopTimer={stopTimer}
-      /> */}
+      <RemainingPomodoroDisplay
+        timerPercentage={timerPercentage}
+        remainingPomodoros={4}
+      />
       <TimerControlButton
         isTimerRunning={isTimerRunning}
         startTimer={startTimer}
