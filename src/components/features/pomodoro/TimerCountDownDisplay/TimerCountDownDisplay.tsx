@@ -3,12 +3,12 @@ import { StyleSheet, Text } from 'react-native';
 import { AnimatedCircularProgress } from 'react-native-circular-progress';
 
 type TimerCountDownDisplayProps = {
-  timerDate: Date;
+  timerCountToDisplay: string;
   timerPercentage: number;
 };
 
 export const TimerCountDownDisplay: FC<TimerCountDownDisplayProps> = ({
-  timerDate,
+  timerCountToDisplay,
   timerPercentage,
 }) => {
   return (
@@ -18,13 +18,11 @@ export const TimerCountDownDisplay: FC<TimerCountDownDisplayProps> = ({
       fill={timerPercentage}
       rotation={360}
       tintColor="#fff"
-      style={{ transform: [{ scaleX: -1 }] }}>
+      style={{ transform: [{ scaleX: -1 }] }}
+    >
       {() => {
         return (
-          <Text style={styles.timerCounterText}>
-            {timerDate.getMinutes().toString().padStart(2, '0')} :{' '}
-            {timerDate.getSeconds().toString().padStart(2, '0')}
-          </Text>
+          <Text style={styles.timerCounterText}>{timerCountToDisplay}</Text>
         );
       }}
     </AnimatedCircularProgress>

@@ -1,58 +1,43 @@
 import { StatusBar } from 'expo-status-bar';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 import { TimerCountDownDisplay } from '../../../components/features/pomodoro/TimerCountDownDisplay/TimerCountDownDisplay';
 import { TimerControlButton } from '../../../components/features/pomodoro/TimerControlButton/TimerControlButton';
 import { RemainingPomodoroDisplay } from '../../../components/features/pomodoro/RemainingPomodorosDisplay/RemainingPomodoroDisplay';
+import { useTimerCount } from '../../../hooks/feature/pomodoro/useTimerCount';
 
-const focusTimeMin = 1 * 60 * 1000;
-const breakTimeMin = 1 * 60 * 1000;
+const pomodoroCount = 4;
 
 export const PomodoroScreen = () => {
-  const [timerCount, setTimerCount] = useState(focusTimeMin);
-  const [timerInterval, setTimerInterval] = useState<NodeJS.Timeout | null>(
-    null
-  );
-  const [isTimerRunning, setIsTimerRunning] = useState(false);
-  const [timerMode, setTimerMode] = useState<'Focus' | 'Break'>('Focus');
-
-  const startTimer = () => {
-    const interval = setInterval(() => {
-      setTimerCount((prev) => prev - 1000);
-    }, 1000);
-    setTimerInterval(interval);
-    setIsTimerRunning(true);
-  };
-
-  const stopTimer = () => {
-    if (!timerInterval) return;
-    clearInterval(timerInterval);
-    setIsTimerRunning(false);
-  };
-  const timerPercentageCal = (timerMin: number, timerCount: number) => {
-    const percentage = (timerCount / timerMin) * 100;
-    return percentage;
-  };
-
-  const timerDate = new Date(timerCount);
-
-  const timerPercentage =
-    timerMode === 'Focus'
-      ? timerPercentageCal(focusTimeMin, timerCount)
-      : timerPercentageCal(breakTimeMin, timerCount);
+  const {
+    timerCountToDisplay,
+    timerMode,
+    isTimerRunning,
+    startTimer,
+    stopTimer,
+    toggleTimerMode,
+    timerPercentage,
+    remainingPomodoroSeries,
+  } = useTimerCount();
 
   const containerStyle =
     timerMode === 'Focus' ? styles.containerOnFocus : styles.containerOnBreak;
+
+  useEffect(() => {
+    console.log('timerCountToDisplay: ', timerCountToDisplay);
+    if (timerCountToDisplay === '00 : 00') toggleTimerMode();
+  }, [timerCountToDisplay]);
+
   return (
     <View style={containerStyle}>
       <StatusBar style="light" />
       <TimerCountDownDisplay
-        timerDate={timerDate}
+        timerCountToDisplay={timerCountToDisplay}
         timerPercentage={timerPercentage}
       />
       <RemainingPomodoroDisplay
-        timerPercentage={timerPercentage}
-        remainingPomodoros={4}
+        remainingPomodoroSeries={remainingPomodoroSeries}
+        remainingPomodoros={pomodoroCount}
       />
       <TimerControlButton
         isTimerRunning={isTimerRunning}
